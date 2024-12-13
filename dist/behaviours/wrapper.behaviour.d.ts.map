@@ -1,0 +1,1 @@
+{"version":3,"file":"wrapper.behaviour.d.ts","sourceRoot":"src/","sources":["behaviours/wrapper.behaviour.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,aAAa,CAAC;AAExC;;;GAGG;AACH,8BAAsB,gBAAiB,SAAQ,SAAS;IACtD,OAAO,CAAC,QAAQ,CAAC,SAAS,CAAY;IAEtC,SAAS,aAAa,SAAS,EAAE,SAAS;IAK1C,UAAU;IAUV,MAAM,CAAC,SAAS,EAAE,MAAM;IAIxB,MAAM;CAKP"}
