@@ -32,5 +32,6 @@ stateMachine.state = new TimeoutBehaviour(1000)
     console.log('Optionally add event hooks as you like'),
   );
 
-// Assign another behaviour while one is already active and the previous one will be cancelled (if it is still ongoing)
+// Assign another behaviour while one is already active and
+// the previous one will be cancelled (if it is still ongoing)
 stateMachine.state = new CallbackBehaviour(() => console.log('Hello World!'));
