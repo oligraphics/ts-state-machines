@@ -43,7 +43,7 @@ class StateMachine {
         this._state = state;
         state.initialize();
         if (!state.initialized) {
-            throw new Error('Avoid overriding initialize() and hook into onInitialize() or onInitialized() instead.');
+            throw new Error(`Avoid overriding initialize() on ${state.constructor.name} and hook into onInitialize() or onInitialized() instead.`);
         }
     }
     /**
@@ -69,7 +69,7 @@ class StateMachine {
         this._state = state;
         state.initialize();
         if (!state.initialized) {
-            throw new Error('Avoid overriding initialize() and hook into onInitialize() or onInitialized() instead.');
+            throw new Error(`Avoid overriding initialize() on ${state.constructor.name} and hook into onInitialize() or onInitialized() instead.`);
         }
     }
     update(deltaTime) {

@@ -47,7 +47,7 @@ export class StateMachine {
     state.initialize();
     if (!state.initialized) {
       throw new Error(
-        'Avoid overriding initialize() and hook into onInitialize() or onInitialized() instead.',
+        `Avoid overriding initialize() on ${state.constructor.name} and hook into onInitialize() or onInitialized() instead.`,
       );
     }
   }
@@ -76,7 +76,7 @@ export class StateMachine {
     state.initialize();
     if (!state.initialized) {
       throw new Error(
-        'Avoid overriding initialize() and hook into onInitialize() or onInitialized() instead.',
+        `Avoid overriding initialize() on ${state.constructor.name} and hook into onInitialize() or onInitialized() instead.`,
       );
     }
   }
