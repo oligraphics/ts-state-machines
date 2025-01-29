@@ -6,7 +6,7 @@ import { Behaviour } from './behaviour';
 export declare abstract class WrapperBehaviour extends Behaviour {
     private readonly behaviour;
     protected constructor(behaviour: Behaviour);
-    initialize(): void;
+    onInitialize(): void;
     update(deltaTime: number): void;
     cancel(): void;
 }

@@ -7,7 +7,7 @@ export declare class SequenceBehaviour extends Behaviour {
     readonly stateMachine: StateMachine;
     readonly behaviours: Behaviour[];
     constructor(...behaviours: Behaviour[]);
-    initialize(): void;
+    onInitialize(): void;
     update(deltaTime: number): void;
     onCancelled(): void;
 }

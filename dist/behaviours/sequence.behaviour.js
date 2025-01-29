@@ -14,7 +14,7 @@ class SequenceBehaviour extends behaviour_1.Behaviour {
         this.stateMachine = new state_machine_1.StateMachine();
         this.behaviours = behaviours;
     }
-    initialize() {
+    onInitialize() {
         if (this.behaviours.length === 0) {
             this.complete();
             return;

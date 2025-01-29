@@ -12,7 +12,7 @@ export abstract class WrapperBehaviour extends Behaviour {
     this.behaviour = behaviour;
   }
 
-  initialize() {
+  onInitialize() {
     this.behaviour.bus.on('complete', () => this.complete());
     this.behaviour.bus.on('cancel', () => {
       if (!this.cancelled) {

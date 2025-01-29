@@ -12,7 +12,7 @@ class WrapperBehaviour extends behaviour_1.Behaviour {
         super();
         this.behaviour = behaviour;
     }
-    initialize() {
+    onInitialize() {
         this.behaviour.bus.on('complete', () => this.complete());
         this.behaviour.bus.on('cancel', () => {
             if (!this.cancelled) {

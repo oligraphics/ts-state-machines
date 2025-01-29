@@ -14,7 +14,7 @@ export class SequenceBehaviour extends Behaviour {
     this.behaviours = behaviours;
   }
 
-  initialize() {
+  onInitialize() {
     if (this.behaviours.length === 0) {
       this.complete();
       return;
