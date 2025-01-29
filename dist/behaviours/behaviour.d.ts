@@ -4,6 +4,8 @@ import { EventBus } from 'ts-event-bus';
  */
 export declare abstract class Behaviour {
     readonly bus: EventBus;
+    initialized: boolean;
+    paused: boolean;
     completed: boolean;
     cancelled: boolean;
     finished: boolean;
@@ -16,6 +18,8 @@ export declare abstract class Behaviour {
      * @param deltaTime Time in milliseconds since the last update call
      */
     update(deltaTime: number): void;
+    pause(): void;
+    resume(): void;
     /**
      * Called when the behaviour successfully finishes
      */
@@ -39,6 +43,22 @@ export declare abstract class Behaviour {
      * @param _deltaTime Time in milliseconds since the last update call
      */
     onUpdate(_deltaTime: number): void;
+    /**
+     * Run just before the pause event
+     */
+    onPause(): void;
+    /**
+     * Run just after the pause event
+     */
+    onPaused(): void;
+    /**
+     * Run just before the resume event
+     */
+    onResume(): void;
+    /**
+     * Run just after the resume event
+     */
+    onResumed(): void;
     /**
      * Run just before the completion event
      */

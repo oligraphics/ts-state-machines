@@ -5,6 +5,8 @@ import { EventBus } from 'ts-event-bus';
  */
 export abstract class Behaviour {
   readonly bus = new EventBus();
+  initialized = false;
+  paused = false;
   completed = false;
   cancelled = false;
   finished = false;
@@ -13,6 +15,14 @@ export abstract class Behaviour {
    * Called exactly once when the behaviour begins running
    */
   initialize() {
+    if (this.initialized) {
+      throw new Error(
+        'Trying to reinitialize the behaviour ' +
+          this.constructor.name +
+          '! This is illegal!',
+      );
+    }
+    this.initialized = true;
     this.onInitialize();
     this.bus.trigger('initialize');
     this.onInitialized();
@@ -24,6 +34,20 @@ export abstract class Behaviour {
    */
   update(deltaTime: number) {
     this.onUpdate(deltaTime);
+  }
+
+  pause() {
+    this.paused = true;
+    this.onPause();
+    this.bus.trigger('pause');
+    this.onPaused();
+  }
+
+  resume() {
+    this.paused = false;
+    this.onResume();
+    this.bus.trigger('resume');
+    this.onResumed();
   }
 
   /**
@@ -90,6 +114,34 @@ export abstract class Behaviour {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onUpdate(_deltaTime: number) {
+    // Overriding is optional
+  }
+
+  /**
+   * Run just before the pause event
+   */
+  onPause() {
+    // Overriding is optional
+  }
+
+  /**
+   * Run just after the pause event
+   */
+  onPaused() {
+    // Overriding is optional
+  }
+
+  /**
+   * Run just before the resume event
+   */
+  onResume() {
+    // Overriding is optional
+  }
+
+  /**
+   * Run just after the resume event
+   */
+  onResumed() {
     // Overriding is optional
   }
 

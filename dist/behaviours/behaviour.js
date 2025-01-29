@@ -7,6 +7,8 @@ const ts_event_bus_1 = require("ts-event-bus");
  */
 class Behaviour {
     bus = new ts_event_bus_1.EventBus();
+    initialized = false;
+    paused = false;
     completed = false;
     cancelled = false;
     finished = false;
@@ -14,6 +16,12 @@ class Behaviour {
      * Called exactly once when the behaviour begins running
      */
     initialize() {
+        if (this.initialized) {
+            throw new Error('Trying to reinitialize the behaviour ' +
+                this.constructor.name +
+                '! This is illegal!');
+        }
+        this.initialized = true;
         this.onInitialize();
         this.bus.trigger('initialize');
         this.onInitialized();
@@ -24,6 +32,18 @@ class Behaviour {
      */
     update(deltaTime) {
         this.onUpdate(deltaTime);
+    }
+    pause() {
+        this.paused = true;
+        this.onPause();
+        this.bus.trigger('pause');
+        this.onPaused();
+    }
+    resume() {
+        this.paused = false;
+        this.onResume();
+        this.bus.trigger('resume');
+        this.onResumed();
     }
     /**
      * Called when the behaviour successfully finishes
@@ -83,6 +103,30 @@ class Behaviour {
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onUpdate(_deltaTime) {
+        // Overriding is optional
+    }
+    /**
+     * Run just before the pause event
+     */
+    onPause() {
+        // Overriding is optional
+    }
+    /**
+     * Run just after the pause event
+     */
+    onPaused() {
+        // Overriding is optional
+    }
+    /**
+     * Run just before the resume event
+     */
+    onResume() {
+        // Overriding is optional
+    }
+    /**
+     * Run just after the resume event
+     */
+    onResumed() {
         // Overriding is optional
     }
     /**

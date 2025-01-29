@@ -27,11 +27,13 @@ requestAnimationFrame(tick);
 
 // Assign a behaviour
 stateMachine.state = new TimeoutBehaviour(1000)
-  .addEventListener('complete', () => console.log('This will not be called'))
+  .addEventListener('pause', ()=>console.log("Timeout got paused"))
+  .addEventListener('resume', ()=>console.log("Timeout got resumed"))
+  .addEventListener('complete', () => console.log('This will be called 1000 ms after the Hello World'))
   .addEventListener('cancel', () =>
     console.log('Optionally add event hooks as you like'),
   );
 
 // Assign another behaviour while one is already active and
 // the previous one will be cancelled (if it is still ongoing)
-stateMachine.state = new CallbackBehaviour(() => console.log('Hello World!'));
+stateMachine.insertState(new CallbackBehaviour(() => console.log('Hello World!')));
