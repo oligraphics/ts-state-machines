@@ -64,8 +64,8 @@ export class StateMachine {
       this._paused.push(pausedState);
       pausedState.pause();
     }
-    state.bus.on('finish', () => {
-      if (this._state === state) {
+    state.bus.on('complete', () => {
+      if (this._state === state || this._state === undefined) {
         this._state = this._paused.splice(0, 1).find(() => true);
         if (this._state) {
           this._state.resume();
@@ -82,6 +82,10 @@ export class StateMachine {
   }
 
   update(deltaTime: number) {
+    if (this._state === undefined && this._paused.length > 0) {
+      this._state = this._paused.splice(0, 1).find(() => true);
+      this._state?.resume();
+    }
     this._state?.update(deltaTime);
     if (this._state?.finished) {
       this._state = undefined;
@@ -90,6 +94,9 @@ export class StateMachine {
 
   cancel() {
     this._state?.cancel();
+    for (const state of this._paused) {
+      state.cancel();
+    }
     this._state = undefined;
   }
 }
