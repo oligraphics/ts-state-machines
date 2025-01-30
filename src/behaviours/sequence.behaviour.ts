@@ -35,6 +35,7 @@ export class SequenceBehaviour extends Behaviour {
     this.behaviours[this.behaviours.length - 1].bus.on('complete', () =>
       this.complete(),
     );
+    this.behaviours[this.behaviours.length - 1].bus.on('cancel', cancelHandler);
     this.stateMachine.setState(this.behaviours[0]);
   }
 
